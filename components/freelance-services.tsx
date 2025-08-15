@@ -45,12 +45,12 @@ export function FreelanceServices() {
   ]
 
   const benefits = [
-    "8 años de experiencia comprobada",
-    "Comunicación fluida en español e inglés",
-    "Metodologías ágiles y entregas puntuales",
-    "Código limpio y documentado",
-    "Soporte post-entrega incluido",
-    "Precios competitivos",
+    t("services.why.experience"),
+    t("services.why.communication"),
+    t("services.why.methodology"),
+    t("services.why.code"),
+    t("services.why.support"),
+    t("services.why.pricing"),
   ]
 
   const scrollToContact = () => {
@@ -108,7 +108,7 @@ export function FreelanceServices() {
 
           <div className="bg-muted/50 rounded-lg p-8">
             <div className="max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold text-center mb-8 text-foreground">¿Por qué elegir mis servicios?</h3>
+              <h3 className="text-2xl font-bold text-center mb-8 text-foreground">{t("services.why.title")}</h3>
 
               <div className="grid md:grid-cols-2 gap-6">
                 {benefits.map((benefit, index) => (
@@ -121,7 +121,7 @@ export function FreelanceServices() {
 
               <div className="text-center mt-8">
                 <Button size="lg" className="bg-accent hover:bg-accent/90" onClick={scrollToContact}>
-                  Comenzar Proyecto
+                  {t("services.why.cta")}
                 </Button>
               </div>
             </div>
