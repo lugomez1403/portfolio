@@ -39,40 +39,40 @@ export function Header() {
           <div className="text-xl font-bold text-primary min-w-[100px]">Portfolio</div>
 
           <div className="hidden lg:flex items-center justify-center flex-1 max-w-2xl mx-8">
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-6 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 px-6 py-3 rounded-full border border-primary/20 backdrop-blur-sm">
               <button
                 onClick={() => scrollToSection("inicio")}
-                className="text-foreground hover:text-primary transition-colors whitespace-nowrap text-sm font-medium"
+                className="text-foreground hover:text-primary transition-all duration-300 whitespace-nowrap text-sm font-medium hover:scale-105 px-3 py-1 rounded-full hover:bg-primary/10"
               >
                 {t("nav.home")}
               </button>
               <button
                 onClick={() => scrollToSection("sobre-mi")}
-                className="text-foreground hover:text-primary transition-colors whitespace-nowrap text-sm font-medium"
+                className="text-foreground hover:text-primary transition-all duration-300 whitespace-nowrap text-sm font-medium hover:scale-105 px-3 py-1 rounded-full hover:bg-primary/10"
               >
                 {t("nav.about")}
               </button>
               <button
                 onClick={() => scrollToSection("experiencia")}
-                className="text-foreground hover:text-primary transition-colors whitespace-nowrap text-sm font-medium"
+                className="text-foreground hover:text-primary transition-all duration-300 whitespace-nowrap text-sm font-medium hover:scale-105 px-3 py-1 rounded-full hover:bg-primary/10"
               >
                 {t("nav.experience")}
               </button>
               <button
                 onClick={() => scrollToSection("habilidades")}
-                className="text-foreground hover:text-primary transition-colors whitespace-nowrap text-sm font-medium"
+                className="text-foreground hover:text-primary transition-all duration-300 whitespace-nowrap text-sm font-medium hover:scale-105 px-3 py-1 rounded-full hover:bg-primary/10"
               >
                 {t("nav.skills")}
               </button>
               <button
                 onClick={() => scrollToSection("proyectos")}
-                className="text-foreground hover:text-primary transition-colors whitespace-nowrap text-sm font-medium"
+                className="text-foreground hover:text-primary transition-all duration-300 whitespace-nowrap text-sm font-medium hover:scale-105 px-3 py-1 rounded-full hover:bg-primary/10"
               >
                 {t("nav.projects")}
               </button>
               <button
                 onClick={() => scrollToSection("servicios")}
-                className="text-foreground hover:text-primary transition-colors whitespace-nowrap text-sm font-medium"
+                className="text-foreground hover:text-primary transition-all duration-300 whitespace-nowrap text-sm font-medium hover:scale-105 px-3 py-1 rounded-full hover:bg-primary/10"
               >
                 {t("nav.services")}
               </button>
@@ -80,18 +80,21 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-3 min-w-[140px] justify-end">
-            {/* Theme Toggle Button */}
-            <ThemeToggle />
+            <div className="flex items-center gap-2 bg-muted/50 rounded-full p-1 border border-border/50">
+              <ThemeToggle />
+            </div>
 
             {/* Language Selector - Desktop */}
             <div className="hidden md:block">
-              <LanguageSelector />
+              <div className="bg-muted/50 rounded-full p-1 border border-border/50">
+                <LanguageSelector />
+              </div>
             </div>
 
             {/* Contact Button - Desktop */}
             <Button
               onClick={() => scrollToSection("contacto")}
-              className="hidden lg:flex bg-primary hover:bg-primary/90 text-sm px-4"
+              className="hidden lg:flex bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-sm px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               {t("nav.contact")}
             </Button>
