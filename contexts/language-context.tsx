@@ -104,16 +104,6 @@ const translations = {
 
     "services.cta": "Get Quote",
 
-    // Why Choose My Services
-    "services.why.title": "Why Choose My Services?",
-    "services.why.experience": "8 years of proven experience",
-    "services.why.communication": "Fluent communication in Spanish and English",
-    "services.why.methodology": "Agile methodologies and timely deliveries",
-    "services.why.code": "Clean and documented code",
-    "services.why.support": "Post-delivery support included",
-    "services.why.pricing": "Competitive pricing",
-    "services.why.cta": "Start Project",
-
     // Contact
     "contact.title": "Contact",
     "contact.subtitle": "Have a project in mind? Let's talk and make it happen!",
@@ -227,16 +217,6 @@ const translations = {
     "services.consulting.features.mentoring": "Mentoría de Equipos",
 
     "services.cta": "Solicitar Cotización",
-
-    // Why Choose My Services
-    "services.why.title": "¿Por qué elegir mis servicios?",
-    "services.why.experience": "8 años de experiencia comprobada",
-    "services.why.communication": "Comunicación fluida en español e inglés",
-    "services.why.methodology": "Metodologías ágiles y entregas puntuales",
-    "services.why.code": "Código limpio y documentado",
-    "services.why.support": "Soporte post-entrega incluido",
-    "services.why.pricing": "Precios competitivos",
-    "services.why.cta": "Comenzar Proyecto",
 
     // Contact
     "contact.title": "Contacto",
