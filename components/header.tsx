@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { LanguageSelector } from "./language-selector"
+import { ThemeToggle } from "./theme-toggle"
 import { useLanguage } from "@/contexts/language-context"
 
 export function Header() {
@@ -79,6 +80,9 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-3 min-w-[140px] justify-end">
+            {/* Theme Toggle Button */}
+            <ThemeToggle />
+
             {/* Language Selector - Desktop */}
             <div className="hidden md:block">
               <LanguageSelector />
@@ -106,6 +110,11 @@ export function Header() {
 
         {isMenuOpen && (
           <div className="lg:hidden mt-4 py-4 border-t border-border bg-background/95 backdrop-blur-sm rounded-lg">
+            {/* Theme Toggle - Mobile */}
+            <div className="mb-4 flex justify-center">
+              <ThemeToggle />
+            </div>
+
             {/* Language Selector - Mobile */}
             <div className="mb-6 flex justify-center">
               <LanguageSelector />
