@@ -12,6 +12,11 @@ import { Mail, Phone, MapPin, Github, Linkedin, Send, MessageCircle, CheckCircle
 import { useLanguage } from "@/contexts/language-context"
 import emailjs from "@emailjs/browser"
 
+// Inicializar EmailJS
+if (typeof window !== 'undefined') {
+  emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "I-Zq9xxK6ddg762ub")
+}
+
 export function Contact() {
   const { t } = useLanguage()
   const [formData, setFormData] = useState({
@@ -30,22 +35,28 @@ export function Contact() {
     setStatus("idle")
 
     try {
-      emailjs.init("YOUR_PUBLIC_KEY") // Replace with your actual public key
-
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_email: "l.e.g.p.031192@gmail.com",
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+      
+      if (!serviceId || !templateId) {
+        throw new Error('EmailJS configuration missing')
       }
 
-      await emailjs.send(
-        "service_79f7j92", // Your service ID
-        "YOUR_TEMPLATE_ID", // Replace with your template ID
-        templateParams,
+      const templateParams = {
+        user_name: formData.name,
+        user_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        email: "l.e.g.p.031192@gmail.com",
+      }
+
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams
       )
 
+      console.log("EmailJS Success:", result)
       setStatus("success")
       setFormData({ name: "", email: "", subject: "", message: "" })
     } catch (error) {
