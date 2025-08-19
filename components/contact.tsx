@@ -8,8 +8,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Mail, Phone, MapPin, Github, Linkedin, Send, MessageCircle } from "lucide-react"
+import { Mail, Phone, MapPin, Github, Linkedin, Send, MessageCircle, CheckCircle, AlertCircle } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
+import emailjs from "@emailjs/browser"
 
 export function Contact() {
   const { t } = useLanguage()
@@ -20,13 +21,39 @@ export function Contact() {
     message: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Crear el enlace mailto con los datos del formulario
-    const mailtoLink = `mailto:l.e.g.p.031192@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-      `${t("contact.form.name")}: ${formData.name}\n${t("contact.form.email")}: ${formData.email}\n\n${t("contact.form.message")}:\n${formData.message}`,
-    )}`
-    window.location.href = mailtoLink
+    setIsLoading(true)
+    setStatus("idle")
+
+    try {
+      emailjs.init("YOUR_PUBLIC_KEY") // Replace with your actual public key
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: "l.e.g.p.031192@gmail.com",
+      }
+
+      await emailjs.send(
+        "service_79f7j92", // Your service ID
+        "YOUR_TEMPLATE_ID", // Replace with your template ID
+        templateParams,
+      )
+
+      setStatus("success")
+      setFormData({ name: "", email: "", subject: "", message: "" })
+    } catch (error) {
+      console.error("EmailJS Error:", error)
+      setStatus("error")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -126,6 +153,20 @@ export function Contact() {
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-6 text-foreground">{t("contact.form.title")}</h3>
 
+                {status === "success" && (
+                  <div className="mb-6 p-4 bg-green-500/10 border border-green-500/20 rounded-lg flex items-center gap-3">
+                    <CheckCircle className="h-5 w-5 text-green-500" />
+                    <p className="text-green-700 dark:text-green-400">¡Mensaje enviado exitosamente!</p>
+                  </div>
+                )}
+
+                {status === "error" && (
+                  <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-3">
+                    <AlertCircle className="h-5 w-5 text-red-500" />
+                    <p className="text-red-700 dark:text-red-400">Error al enviar el mensaje. Inténtalo de nuevo.</p>
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
@@ -192,9 +233,23 @@ export function Contact() {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90" size="lg">
-                    <Send className="mr-2 h-5 w-5" />
-                    {t("contact.form.send")}
+                  <Button
+                    type="submit"
+                    className="w-full bg-primary hover:bg-primary/90"
+                    size="lg"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <>
+                        <div className="mr-2 h-5 w-5 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                        Enviando...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-5 w-5" />
+                        {t("contact.form.send")}
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>
