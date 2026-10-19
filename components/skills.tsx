@@ -2,6 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Code, Database, Settings, Briefcase } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 
@@ -86,15 +87,21 @@ export function Skills() {
             ))}
           </div>
 
-          <div className="mt-12 text-center">
-            <Card className="bg-accent/10 border-accent/20 max-w-2xl mx-auto">
+          <div id="certificados" className="mt-12 scroll-mt-24">
+            <h3 className="text-2xl font-bold text-center mb-6 text-foreground">Certificados</h3>
+            <Card className="bg-card border-border max-w-2xl mx-auto overflow-hidden">
+              <a href="/certificates/coursera-OU3SUO6NK8UR.pdf" target="_blank" rel="noopener noreferrer" className="block" aria-label="Abrir certificado Foundations: Data, Data, Everywhere en PDF (otra pestaña)">
+                <img src="/certificates/coursera-OU3SUO6NK8UR.png" alt="Certificado de Google y Coursera: Foundations: Data, Data, Everywhere, otorgado a Luis Enrique Gomez Pérez" className="w-full h-auto" loading="lazy" />
+              </a>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-3 text-foreground">🎓 Certificación en Proceso</h3>
-                <p className="text-muted-foreground">
-                  Actualmente preparándome para obtener certificaciones oficiales en
-                  <span className="font-semibold text-accent"> Google Cloud Platform</span> para ampliar mis
-                  conocimientos en arquitectura cloud y mejores prácticas.
-                </p>
+                <Badge variant="secondary" className="mb-3">Google · Coursera</Badge>
+                <h4 className="text-xl font-semibold mb-3 text-foreground">Foundations: Data, Data, Everywhere</h4>
+                <p className="text-muted-foreground mb-1">Luis Enrique Gomez Pérez</p>
+                <p className="text-sm text-muted-foreground mb-5">Completado el <time dateTime="2025-09-18">18 de septiembre de 2025</time></p>
+                <div className="flex flex-wrap gap-3">
+                  <Button asChild><a href="/certificates/coursera-OU3SUO6NK8UR.pdf" target="_blank" rel="noopener noreferrer">Ver certificado PDF</a></Button>
+                  <Button asChild variant="outline"><a href="https://coursera.org/verify/OU3SUO6NK8UR" target="_blank" rel="noopener noreferrer">Verificar en Coursera</a></Button>
+                </div>
               </CardContent>
             </Card>
           </div>

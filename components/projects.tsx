@@ -3,13 +3,22 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, Code } from "lucide-react"
+import { Github, Code, ExternalLink } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 
 export function Projects() {
   const { t } = useLanguage()
 
   const projects = [
+    {
+      title: "Hotel El Cozumeleño — Hotel Coz",
+      description:
+        "Proyecto reciente: sitio web de Hotel El Cozumeleño, un resort todo incluido frente al mar Caribe en Cozumel.",
+      technologies: ["Sitio web", "Hotelería"],
+      type: "Proyecto reciente",
+      image: "/images/hotelcoz-preview.png",
+      url: "https://hotelcoz.com/",
+    },
     {
       title: "Sistema CRM - Royal Vacations",
       description:
@@ -50,6 +59,17 @@ export function Projects() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <Card key={index} className="bg-card border-border hover:shadow-lg transition-shadow overflow-hidden">
+                {project.url ? (
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" className="block group" aria-label={`Visitar ${project.title} (abre en otra pestaña)`}>
+                    <div className="aspect-video bg-muted overflow-hidden">
+                      <img src={project.image} alt="Vista previa de Hotel El Cozumeleño frente al mar Caribe" className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                    </div>
+                    <div className="px-6 py-3 border-b border-border text-sm text-muted-foreground flex items-center gap-2">
+                      <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                      hotelcoz.com
+                    </div>
+                  </a>
+                ) : (
                 <div className="aspect-video bg-muted">
                   <img
                     src={project.image || "/placeholder.svg"}
@@ -57,6 +77,7 @@ export function Projects() {
                     className="w-full h-full object-cover"
                   />
                 </div>
+                )}
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-3">
                     <Badge variant="outline" className="border-primary/20 text-primary">
@@ -77,10 +98,19 @@ export function Projects() {
                   </div>
 
                   <div className="flex gap-3">
+                    {project.url ? (
+                      <Button asChild variant="outline" size="sm" className="flex-1 bg-transparent">
+                        <a href={project.url} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="mr-2 h-4 w-4" />
+                          Visitar sitio
+                        </a>
+                      </Button>
+                    ) : (
                     <Button variant="outline" size="sm" className="flex-1 bg-transparent">
                       <Code className="mr-2 h-4 w-4" />
                       Ver Detalles
                     </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
